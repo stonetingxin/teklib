@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.teklib.model">
+    <class name="BookFile" table="BOOK_FILE" lazy="true">
+        <id name="id" column="BOOK_FILE_ID">
+	        <generator class="hilo"/>
+        </id>
+        
+        <property type="string" length="200" name="filename" index="indexBookFileFilename"/>
+        <property type="string" length="3" name="format"/>
+    </class>
+
+	<query name="BookFileByName">
+	<![CDATA[from BookFile as b where b.filename = ?]]>
+	</query>
+	<query name="BookFileCount">
+	<![CDATA[select count(*) from BookFile]]>
+	</query>
+</hibernate-mapping>

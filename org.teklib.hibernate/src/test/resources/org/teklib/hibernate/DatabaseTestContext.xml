@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+
+	<!-- enable classpath scanning -->
+	<context:component-scan base-package="org.teklib.hibernate" />
+
+	<!-- Start hibernate configuration -->
+	<bean id="DataSource" class="org.apache.commons.dbcp.BasicDataSource">
+			<property name="driverClassName" value="org.hsqldb.jdbc.JDBCDriver" />
+		<property name="url" value="jdbc:hsqldb:mem:teklib" />
+		<property name="username" value="SA" />
+		<property name="password" value="" />
+	</bean>
+
+	<bean id="SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="DataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>org/teklib/hibernate/Book.hbm.xml</value>
+				<value>org/teklib/hibernate/BookFile.hbm.xml</value>
+				<value>org/teklib/hibernate/CoverImage.hbm.xml</value>
+				<value>org/teklib/hibernate/Publisher.hbm.xml</value>
+				<value>org/teklib/hibernate/Shelf.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
+				<prop key="show_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">create-drop</prop>
+ 				<prop key="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+   			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory"><ref bean="SessionFactory" /></property>
+	</bean>
+    <bean id="hibernateInterceptor" class="org.springframework.orm.hibernate3.HibernateInterceptor">
+         <property name="sessionFactory">
+           <ref local="SessionFactory"/>
+         </property>
+    </bean>
+
+	<bean id="teklibDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+		        <ref local="transactionManager1"/>
+		</property>
+		<property name="target">
+		        <ref bean="teklibDaoServiceTarget"/>
+		</property>
+		<property name="transactionAttributes">
+		        <props>
+		                <prop key="*">
+		                        PROPAGATION_REQUIRED
+		                </prop>
+		        </props>
+		</property>
+	</bean>
+	<bean id="transactionManager1" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	        <property name="sessionFactory">
+	                <ref local="SessionFactory"/>
+	        </property>
+	</bean>
+	<!-- End hibernate configuration -->
+
+	<!--  start dao -->
+    <bean name="teklibDaoServiceTarget" class="org.teklib.hibernate.TeklibDaoImpl">
+		<property name="hibernateTemplate"><ref bean="hibernateTemplate" /></property>
+    </bean>
+	<!--  end dao -->
+</beans>

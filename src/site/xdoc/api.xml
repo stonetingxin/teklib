@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document xmlns="http://maven.apache.org/XDOC/2.0"
+          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+          xsi:schemaLocation="http://maven.apache.org/XDOC/2.0 http://maven.apache.org/xsd/xdoc-2.0.xsd">
+
+    <properties>
+        <title>Teklib API</title>
+    </properties>
+
+    <body>
+
+        <!-- The body of the document contains a number of sections -->
+        <section name="api">
+            <subsection id="book" name="book">
+                <p>Get a book by ID.</p>
+                <p><strong>Request: </strong>/book/{ID}</p>
+                <p><strong>Response: </strong>{book:{name:NAME, }}</p>
+            </subsection>
+            <subsection name="shelf">
+                <p>Get a List of all shelfs.</p>
+            </subsection>
+            <subsection id="publishers" name="publishers">
+                <p>Get a List of all publishers.</p>
+            </subsection>
+        </section>
+        <section name="aside">
+            <a href="#publishers">publishers</a>
+            <a href="#shelfs">shelfs</a>
+        </section>
+    </body>
+</document>

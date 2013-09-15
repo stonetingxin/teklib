@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.teklib.model">
+    <class name="CoverImage" table="COVER_IMAGE" lazy="true">
+        <id name="id" column="COVER_IMAGE_ID">
+	        <generator class="hilo"/>
+        </id>
+        
+	    <property type="int" name="type"/>
+	    <property type="int" name="height"/>
+	    <property type="int" name="width"/>
+	    <property type="string" length="30" name="mimeType"/>
+	    <property type="binary" length="9064" name="image"/>
+    </class>
+
+	<query name="ImageById">
+	<![CDATA[from CoverImage as image where image.id = ?]]>
+	</query>
+	<query name="CoverImageCount">
+	<![CDATA[select count(*) from CoverImage]]>
+	</query>
+</hibernate-mapping>

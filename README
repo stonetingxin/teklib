@@ -1,0 +1,58 @@
+Teklib
+======
+
+Teklib is a simple web application for managing your electronic book archive.
+
+build the project
+-----------------
+
+mvn install
+
+
+create the database
+-------------------
+
+
+
+install the project
+-------------------
+
+copy the database jdbc driver to $TOMCAT_HOME/lib
+> cp mysql-connector-java-5.1.6.jar $TOMCAT_HOME/lib
+
+
+copy and edit the teklib.properties file to $TOMCAT_HOME/lib
+
+edit the $TOMCAT_HOME/conf/server.xml 
+
+---------------------------
+<GlobalNamingResources>
+    <Resource
+      name="jdbc/teklib"
+      type="javax.sql.DataSource"
+      maxActive="4"
+      maxIdle="2"
+      username="username"
+      maxWait="5000"
+      validationQuery="select 1"         
+      driverClassName="com.mysql.jdbc.Driver"
+      password="password"     
+      url="jdbc:mysql://127.0.0.1/teklib"/>
+</GlobalNamingResources>
+----------------------------
+
+= Install in Jetty =
+
+
+create a file named teklib.xml in $JETTY_HOME/contexts (debian: /etc/jetty/contexts)
+
+----------------------------
+< ?xml version="1.0"  encoding="ISO-8859-1"?>
+< !DOCTYPE Configure PUBLIC "-//Mort Bay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+<configure class="org.mortbay.jetty.webapp.WebAppContext">
+  <set name="contextPath">/teklib</set>
+  <set name="war"><systemproperty name="jetty.home" default="."/>/webapps/org.teklib.www-x.y.z.war</set>
+</configure>
+----------------------------
+
+

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+      "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="org.teklib.model">
+    <class name="Book" table="BOOK" lazy="true">
+        <id name="id" column="BOOK_ID">
+	        <generator class="hilo"/>
+        </id>
+
+		<set name="files" cascade="all">
+			<key column="FILES"/>
+			<one-to-many class="BookFile"/>
+		</set>
+		
+		<many-to-one name="coverImage" class="CoverImage" column="BOOK_IMAGE" not-null="false" cascade="all" unique="true" />
+		<many-to-one name="publisher" column="PUBLISHER_ID" cascade="save-update" not-null="true"/>
+		<many-to-one name="shelf" column="SHELF_ID" cascade="save-update" not-null="true"/>
+	
+		<property type="string" length="20" name="isbn" not-null="true" unique="true" index="indexBookIsbn"/>
+		<property type="string" length="125" name="name" not-null="true" unique="true" index="indexBookName"/>
+		<property type="text" name="description"/>
+		<property type="string" length="50" name="author"/>
+		<property type="string" length="10" name="releaseDate"/>
+		<property type="timestamp" name="insertDate"/>
+    </class>
+
+	<query name="BookList">
+	<![CDATA[from Book as book]]>
+	</query>
+	<query name="BookById">
+	<![CDATA[from Book as b where b.id = ?]]>
+	</query>
+	<query name="BookByIsbn">
+	<![CDATA[from Book as b where b.isbn = ?]]>
+	</query>
+	<query name="BookCount">
+	<![CDATA[select count(*) from Book]]>
+	</query>
+</hibernate-mapping>

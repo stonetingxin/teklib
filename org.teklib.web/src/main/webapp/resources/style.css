@@ -1,0 +1,165 @@
+/* style.css */
+
+/* general settings */
+body {
+	background: White;
+	color: Black;
+	font-family:Tahoma, Arial, sans-serif;
+	font-style: normal;
+	font-size: 10px;
+}
+header {
+	background:White;
+	float:left;
+	color: Orange;
+	font-size:14px;
+}
+navigation {
+	width: 1100px;
+	margin: 0 auto;
+	margin-top: 20px;
+	text-align: center;
+}
+
+h2 { color:#a0a0a0; font-weight:bold; font-size:14px; margin-top:5px; margin-bottom:5px; }
+
+
+/*
+ * edit overlay
+ */
+#edit-div {
+	display:none;
+	width:700px;
+	border:10px solid #666;
+	border:10px solid rgba(82, 82, 82, 0.698);
+	-moz-border-radius:8px;
+	-webkit-border-radius:8px;
+}
+#edit-navigation {
+	width: 250px;
+	height: 350px;
+	float:left;
+	border: none;
+	overflow-x: hidden; overflow-y: scroll;
+}
+#edit-form-div {
+	height: 350px;
+	border: none;
+	width: 400px;
+	float:right;
+}
+
+/*
+ * form
+ */
+label {
+    clear: left;
+    display: block;
+    float: left;
+    font-weight: 700;
+    padding-right: 1em;
+    text-align: left;
+    width: 7em;
+}
+input {
+    display: block;
+    float: left;
+}
+
+
+/* start scroll box
+#slideshow-area, #slideshow-scroller {
+  height: 330px;
+  position: relative;
+  overflow: scroll;
+  margin: 0 auto;
+}
+
+#slideshow-area {
+  border: 1px solid #000;
+}
+#slideshow-holder {
+  height: 330px;
+}
+#slideshow-previous, #slideshow-next {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background: transparent url("../images/arrow_left.gif") no-repeat 50% 50%;
+  top: 125px;
+  display: none;
+}
+#slideshow-next {
+  display: block;
+  background: transparent url("../images/arrow_right.gif") no-repeat 50% 50%;
+  top: 125px;
+  right: 0;
+}
+.slideshow-content {
+  float: left;
+}                   */
+
+/* Invisible right hotspot
+div.scrollingHotSpotRight {
+	min-width: 75px;
+	width: 10%;
+	height: 100%;
+	background-image: url("../images/big_transparent.gif");
+	background-repeat: repeat;
+	background-position: center center;
+	position: absolute;
+	z-index: 200;
+	right: 0;
+}                          */
+
+/* end scroll box
+
+#edit-form image {
+    width: 10px;
+    height: 10px;
+    border: none;
+}
+#edit-div div {
+	padding:10px;
+	border:1px solid #3B5998;
+	background-color:#fff;
+	font-family:"lucida grande",tahoma,verdana,arial,sans-serif
+} */
+
+/* the edit form
+#edit-form {  
+	display:none;
+	clear: both;
+}
+#edit-form label{
+	clear: left;
+	float: left;
+	width: 41%;
+	padding-right: 2%;
+	height: 1em;
+	margin-bottom: 10px;
+	
+	text-align: right;
+}
+#edit-form input{
+	float: left;
+	height: 1em;	
+	margin-bottom: 15px;
+}
+#edit-form button {
+	float: left;
+	clear: both;
+	margin-left: 43%;
+	
+	display: inline;
+}
+#edit-form input:focus,
+#edit-form select:focus,  
+#edit-form textarea:focus {  
+    border: 1px solid #AFCDD8;  
+    background-color: #EBF2F4;  
+} 
+#delete-button { 
+	display:none; 
+}
+                 */

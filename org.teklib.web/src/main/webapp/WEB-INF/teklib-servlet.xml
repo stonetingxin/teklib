@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xmlns:p="http://www.springframework.org/schema/p"
+  xmlns:tx="http://www.springframework.org/schema/tx"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+	http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+    http://www.directwebremoting.org/schema/spring-dwr
+    http://www.directwebremoting.org/schema/spring-dwr-2.0.xsd">
+
+	<!-- enable classpath scanning -->
+	<context:component-scan base-package="org.teklib.www" />
+
+	<bean class="org.springframework.web.context.support.ServletContextPropertyPlaceholderConfigurer"/>
+	<!-- bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+  		<property name="location">
+    		<value>file:/home/e3a/Downloads/jetty-distribution-8.1.7.v20120910/lib/teklib.properties</value>
+		</property>
+	</bean -->
+
+	<!-- enable anntotation-driven controllers -->
+	<!-- bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" /> -->
+       <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+            <property name="messageConverters">
+              <list>
+                <ref bean="mappingJacksonHttpMessageConverter"/>
+                <ref bean="stringHttpMessageConverter"/>
+                <ref bean="formHttpMessageConverter"/>
+              </list>
+            </property>
+          </bean>
+
+  <bean id="formHttpMessageConverter" class="org.springframework.http.converter.FormHttpMessageConverter"/>
+
+  <bean id="stringHttpMessageConverter" class="org.springframework.http.converter.StringHttpMessageConverter"/>
+
+  <bean id="mappingJacksonHttpMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"/>
+
+    <bean id="jsontemplate" class="org.springframework.web.servlet.view.json.MappingJacksonJsonView"/>
+
+	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="cache" value="true"/>
+		<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+		<property name="prefix" value="/WEB-INF/jsp/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	<!-- Message source for this context, loaded from localized "messages_xx" files -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+    	<property name="basename" value="/org/teklib/www/messages"/>
+  	</bean>
+  	
+	<!-- Start hibernate configuration -->
+	<!-- bean id="DataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://127.0.0.1/teklib" />
+		<property name="username" value="teklib" />
+		<property name="password" value="123" />
+	</bean -->
+	<bean id="DataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+	      <property name="jndiName" value="java:comp/env/jdbc/teklib"/>    
+	      <property name="resourceRef" value="true" /> 
+	</bean>
+
+	<bean id="SessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<property name="dataSource" ref="DataSource" />
+		<property name="mappingResources">
+			<list>
+				<value>org/teklib/hibernate/Book.hbm.xml</value>
+				<value>org/teklib/hibernate/BookFile.hbm.xml</value>
+				<value>org/teklib/hibernate/CoverImage.hbm.xml</value>
+				<value>org/teklib/hibernate/Publisher.hbm.xml</value>
+				<value>org/teklib/hibernate/Shelf.hbm.xml</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+ 				<prop key="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</prop>
+   			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory"><ref bean="SessionFactory" /></property>
+	</bean>
+    <bean id="hibernateInterceptor" class="org.springframework.orm.hibernate3.HibernateInterceptor">
+         <property name="sessionFactory">
+           <ref local="SessionFactory"/>
+         </property>
+    </bean>
+
+	<bean id="teklibService" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+		        <ref local="transactionManager1"/>
+		</property>
+		<property name="target">
+		        <ref bean="teklibServiceTarget"/>
+		</property>
+		<property name="transactionAttributes">
+		        <props>
+		                <prop key="*">
+		                        PROPAGATION_REQUIRED
+		                </prop>
+		        </props>
+		</property>
+	</bean>
+	<bean id="teklibDao" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+		<property name="transactionManager">
+		        <ref local="transactionManager1"/>
+		</property>
+		<property name="target">
+		        <ref bean="teklibDaoServiceTarget"/>
+		</property>
+		<property name="transactionAttributes">
+		        <props>
+		                <prop key="*">
+		                        PROPAGATION_REQUIRED
+		                </prop>
+		        </props>
+		</property>
+	</bean>
+	<bean id="transactionManager1" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	        <property name="sessionFactory">
+	                <ref local="SessionFactory"/>
+	        </property>
+	</bean>
+	<!-- End hibernate configuration -->
+
+	<!--  start dao -->
+    <bean name="teklibDaoServiceTarget" class="org.teklib.hibernate.TeklibDaoImpl">
+		<property name="hibernateTemplate"><ref bean="hibernateTemplate" /></property>
+    </bean>
+	<!--  end dao -->
+
+    <bean id="teklibController" class="org.teklib.www.controller.TeklibController">
+		<property name="teklibService"><ref bean="teklibService"/></property>
+		<property name="path" value="${org.teklib.folder}"/>
+	</bean>
+	<bean id="bookFile" class="org.teklib.www.controller.BookFile">
+		<property name="path" value="${org.teklib.folder}"/>
+	</bean>
+</beans>

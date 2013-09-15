@@ -1,0 +1,54 @@
+    ------
+	Teklib installation
+    ------
+    ------
+    03.10.2010
+
+
+About
+
+  Teklib is a simple web application for managing your electronic book archive.
+
+
+Installation
+  
+  This section describes the <<Teklib>> compilation and installation.
+
+  Get the compiled war: {{{https://192.168.1.2/maven/2/org/teklib/org.teklib.www/1.0.0/org.teklib.www-1.0.0.war} org.teklib.www-1.0.0.war}}
+
+* build the project from source
+
+---------------------------
+mvn install
+---------------------------
+
+* Install the project
+
+  copy the war archive to $TOMCAT_HOME/webapp/teklib.war
+
+  copy the database jdbc driver to $TOMCAT_HOME/lib
+
+---------------------------
+cp mysql-connector-java-5.1.6.jar $TOMCAT_HOME/lib
+---------------------------
+
+  copy and edit the teklib.properties file to $TOMCAT_HOME/lib
+
+  edit the $TOMCAT_HOME/conf/server.xml 
+
+---------------------------
+<GlobalNamingResources>
+    <Resource
+      name="jdbc/teklib"
+      type="javax.sql.DataSource"
+      maxActive="4"
+      maxIdle="2"
+      username="username"
+      maxWait="5000"
+      validationQuery="select 1"         
+      driverClassName="com.mysql.jdbc.Driver"
+      password="password"     
+      url="jdbc:mysql://127.0.0.1/teklib"/>
+</GlobalNamingResources>
+----------------------------
+

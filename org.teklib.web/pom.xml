@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+	<parent>
+		<groupId>org.teklib</groupId>
+		<artifactId>org.teklib.project</artifactId>
+		<version>1.0.2</version>
+		<relativePath>../org.teklib.project</relativePath>
+	</parent>
+	
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.teklib</groupId>
+  <artifactId>org.teklib.web</artifactId>
+  <version>1.0.2</version>
+  <packaging>war</packaging>
+  <name>org.teklib.web</name>
+  <description>Teklib web application</description>
+	<url>${org.teklib.site}/org.teklib.web</url> 
+ 
+  	<dependencies>
+	    <dependency>
+	    	<groupId>org.teklib</groupId>
+	    	<artifactId>org.teklib.api</artifactId>
+	    	<version>${project.version}</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>org.teklib</groupId>
+	    	<artifactId>org.teklib.hibernate</artifactId>
+	    	<version>${project.version}</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>org.teklib</groupId>
+	    	<artifactId>org.teklib.lookup</artifactId>
+	    	<version>${project.version}</version>
+	    </dependency>    
+	    <dependency>
+	    	<groupId>javax.servlet</groupId>
+	    	<artifactId>servlet-api</artifactId>
+	    	<version>2.5</version>
+	    </dependency>
+	    <dependency>
+	    	<groupId>javax.servlet</groupId>
+	    	<artifactId>jstl</artifactId>
+	    	<version>1.2</version>
+	    </dependency>
+		<dependency>
+			<groupId>commons-io</groupId>
+			<artifactId>commons-io</artifactId>
+			<version>1.4</version>
+		</dependency>
+		<dependency>
+		    <groupId>org.codehaus.jackson</groupId>
+		    <artifactId>jackson-mapper-asl</artifactId>
+		    <version>1.8.3</version>
+		</dependency>
+  	</dependencies>
+</project>

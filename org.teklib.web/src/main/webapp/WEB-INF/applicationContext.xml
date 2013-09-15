@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+  xmlns="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xmlns:aop="http://www.springframework.org/schema/aop"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd 
+	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+	<bean id="org.teklib.lookup.LookupService" class="org.teklib.lookup.amazon.LookupFacadeImpl">
+		<property name="awsAccessKeyId" value="AKIAIC5IGJNCXA3YR2FA"/>
+		<property name="awsSecretKey" value="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"/>
+		<property name="endpoint" value="ecs.amazonaws.com"/>
+	</bean>
+
+	<!-- bean class="org.teklib.www.dwr.DwrLookupService">
+		<property name="lookupService" ref="org.teklib.lookup.LookupService"/>
+		<dwr:remote javascript="LookupService">
+    		<dwr:include method="lookup"/>
+			<dwr:convert type="bean" class="org.teklib.lookup.LookupResult">
+	            <dwr:include method="name" />
+	            <dwr:include method="isbn" />
+	            <dwr:include method="publisher" />
+	            <dwr:include method="description" />
+	            <dwr:include method="author" />
+	            <dwr:include method="releaseDate" />
+	            <dwr:include method="imageUrl" />
+	        </dwr:convert>
+  		</dwr:remote>
+	</bean> -->
+</beans>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+  <PUBLISHER PUBLISHER_ID="1001" name="publisher 1"/>
+  <PUBLISHER PUBLISHER_ID="1002" name="publisher 2"/>
+  <SHELF SHELF_ID="1001" name="shelf 1"/>
+  <SHELF SHELF_ID="1002" name="shelf 2"/>
+  <COVER_IMAGE COVER_IMAGE_ID="1001" type="1" height="200" width="50" mimetype="image/jpeg" image="001"/>
+  <COVER_IMAGE COVER_IMAGE_ID="1002" type="1" height="200" width="50" mimetype="image/jpeg" image="002"/>
+  <BOOK BOOK_ID="1001" BOOK_IMAGE="1001" PUBLISHER_ID="1001" SHELF_ID="1001" isbn="100000" name="name 1" 
+  	  description="description 1" author="author 1" releaseDate="2007-04-20 00:00:00.0" insertDate="12-01-2011"/>
+  <BOOK BOOK_ID="1002" BOOK_IMAGE="1002" PUBLISHER_ID="1002" SHELF_ID="1002" isbn="200000" name="name 2" 
+  	  description="description 2" author="author 2" releaseDate="2007-04-20 00:00:00.0" insertDate="12-01-2011"/>
+  <BOOK_FILE BOOK_FILE_ID="1001" filename="filename 1" format="pdf" FILES="1001"/>
+  <BOOK_FILE BOOK_FILE_ID="1002" filename="filename 2" format="pdf" FILES="1002"/>
+</dataset>
