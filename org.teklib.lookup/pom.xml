@@ -5,7 +5,7 @@
 	<parent>
 		<groupId>org.teklib</groupId>
 		<artifactId>org.teklib.project</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.4</version>
 		<relativePath>../org.teklib.project</relativePath>
 	</parent>
 
@@ -13,7 +13,7 @@
 	<groupId>org.teklib</groupId>
 	<artifactId>org.teklib.lookup</artifactId>
 	<name>org.teklib.lookup</name>
-	<version>1.0.2</version>
+	<version>1.0.4</version>
 	<url>${org.teklib.site}/org.teklib.lookup/</url>
 	<description>Teklib libarary for lookup of the books using Amazon web service.</description>
 

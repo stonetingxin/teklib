@@ -14,7 +14,7 @@
 
 	<groupId>org.teklib</groupId>
 	<artifactId>org.teklib.project</artifactId>
-	<version>1.0.2</version>
+	<version>1.0.4</version>
 	<packaging>pom</packaging>
 	<name>org.teklib.project</name>
 	<url>${org.teklib.site}</url>

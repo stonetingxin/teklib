@@ -4,7 +4,7 @@
 	<parent>
 		<groupId>org.teklib</groupId>
 		<artifactId>org.teklib.project</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.4</version>
 		<relativePath>../org.teklib.project</relativePath>
 	</parent>
 
@@ -12,7 +12,7 @@
 	<groupId>org.teklib</groupId>
 	<artifactId>org.teklib.hibernate</artifactId>
 	<name>org.teklib.hibernate</name>
-	<version>1.0.2</version>
+	<version>1.0.4</version>
 	<url>${org.teklib.site}/org.teklib.hibernate/</url>
 	<description>Teklib database persistence library for hibernate.</description>
 

@@ -23,6 +23,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -95,7 +96,12 @@ public class TeklibService {
                 item.put("text", p.getName());
                 jvtPublishers.add(item);
 			}
-		}
+		} else {
+            Map<String, String> item = new HashMap<String, String>();
+            item.put("value", "Miscelangelous");
+            item.put("text", "Miscelangelous");
+            jvtPublishers.add(item);
+        }
 		return jvtPublishers;
 	}
 	public PublisherEditBean getPublisherByName(String name) {
@@ -120,7 +126,7 @@ public class TeklibService {
 		} else {
             Map<String, String> item = new HashMap<String, String>();
             item.put("value", "Miscelangelous");
-            item.put("value", "Miscelangelous");
+            item.put("text", "Miscelangelous");
             jvtShelfs.add(item);
 		}
 		return jvtShelfs;
@@ -280,7 +286,7 @@ public class TeklibService {
 		Collection<BookFileJVT> jvtBooks = new ArrayList<BookFileJVT>();
 		for(BookFile f : book.getFiles()) {
 			BookFileJVT jvtBook = new BookFileJVT();
-			jvtBook.setFilename(f.getFilename());
+			jvtBook.setFilename(URLEncoder.encode(f.getFilename()));
 			jvtBook.setFormat(f.getFormat());
 			jvtBook.setId(f.getId());
 			jvtBooks.add(jvtBook);

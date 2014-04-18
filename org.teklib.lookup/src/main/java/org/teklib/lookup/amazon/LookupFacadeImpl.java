@@ -151,6 +151,7 @@ public class LookupFacadeImpl implements LookupService {
             	Element element = (Element) largeImage.item(i);
             	result.setImageUrl(
             		((CharacterData)element.getElementsByTagName("URL").item(0).getFirstChild()).getData());
+                break;
             }
             
             NodeList editorialReview = doc.getElementsByTagName("EditorialReview");

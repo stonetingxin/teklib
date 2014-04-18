@@ -4,14 +4,14 @@
 	<parent>
 		<groupId>org.teklib</groupId>
 		<artifactId>org.teklib.project</artifactId>
-		<version>1.0.2</version>
+		<version>1.0.4</version>
 		<relativePath>../org.teklib.project</relativePath>
 	</parent>
 	
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.teklib</groupId>
   <artifactId>org.teklib.web</artifactId>
-  <version>1.0.2</version>
+  <version>1.0.4</version>
   <packaging>war</packaging>
   <name>org.teklib.web</name>
   <description>Teklib web application</description>
