@@ -13,6 +13,7 @@
  */
 package org.teklib.www.controller;
 
+import java.net.URLEncoder;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -77,7 +78,7 @@ public class JsonRpcController {
         for(BookFileJVT f : book.getFiles()) {
             Map<String, Object> params = new HashMap<String, Object>();
             params.put("id", f.getId());
-            params.put("name", f.getFilename());
+            params.put("name", URLEncoder.encode(f.getFilename()));
             params.put("type", f.getFormat());
             files.add(params);
         }

@@ -23,7 +23,6 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -286,7 +285,7 @@ public class TeklibService {
 		Collection<BookFileJVT> jvtBooks = new ArrayList<BookFileJVT>();
 		for(BookFile f : book.getFiles()) {
 			BookFileJVT jvtBook = new BookFileJVT();
-			jvtBook.setFilename(URLEncoder.encode(f.getFilename()));
+			jvtBook.setFilename(f.getFilename());
 			jvtBook.setFormat(f.getFormat());
 			jvtBook.setId(f.getId());
 			jvtBooks.add(jvtBook);

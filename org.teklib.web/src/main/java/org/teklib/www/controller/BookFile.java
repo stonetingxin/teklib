@@ -13,6 +13,7 @@
  */
 package org.teklib.www.controller;
 
+import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -41,7 +42,7 @@ public class BookFile {
 
 	@RequestMapping(method = RequestMethod.GET)
     public void bookHandler(@RequestParam("file") String filename, Model modell) {
-    	modell.addAttribute(BookServlet.FILE, getFileMap(filename));
+    	modell.addAttribute(BookServlet.FILE, getFileMap( filename ));
     }
 	protected Map<String, String> getFileMap(String filename) {
     	Map<String, String> map = new HashMap<String, String>();
